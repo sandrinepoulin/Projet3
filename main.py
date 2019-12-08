@@ -5,7 +5,7 @@ import api
 
 def analyser_commande():
     '''Cette fonction permet de traiter la ligne de commande'''
-    parser = argparse.ArgumentParser(description='Jeu Quoridor - Phase 1')
+    parser = argparse.ArgumentParser(description='Jeu Quoridor - phase 1')
     parser.add_argument(metavar='idul', default='idul du joueur', dest='idul',
                         help='IDUL du joueur.')
     parser.add_argument('-l', '--lister', dest='accumulate', action='store_const',
