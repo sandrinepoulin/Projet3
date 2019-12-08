@@ -192,7 +192,7 @@ class Quoridor:
         afficher_damier_ascii(self.état_partie())
 
     def déplacer_jeton(self, joueur, position):
-        '''Méthode qui détermine les déplacements possibles'''
+        '''Méthode qui détermine les déplacements possibles docstring'''
 
         self.graphe = construire_graphe(
             [joueur['pos'] for joueur in self.état_partie()['joueurs']],
