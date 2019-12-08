@@ -64,37 +64,28 @@ def afficher_damier_ascii(dic):
 
     print(pligne + '\n'.join(''.join(i for i in ligne) for ligne in damier) + '\n')
 
+
 def jouer_jeu():
-    '''Cette fonction permet de jouer une partie'''
+
     idul = analyser_commande().idul
     dico = api.débuter_partie(idul)
+    Id = dico['id']
     print(afficher_damier_ascii(dico))
     i = True
-    while i != StopIteration:
+    while i:
         coup = input("Choisir un coup (déplacement = D, mur horizontal = MH, mur vertical = MV) et presser la touche ⏎: ")
         if coup == 'D':
             position = input("Préciser la position (x, y) et presser la touche ⏎: ")
-            dico['état']["joueurs"][0]["pos"] = position
-            api.jouer_coup(dico['id'], coup, position)
-            print(dico)
+            dico = api.jouer_coup(Id, coup, position)
+            afficher_damier_ascii(dico)
         elif coup == 'MH':
             position = input("Préciser la position (x, y) et presser la touche ⏎: ")
-            liste = dico['état']["murs"]["horizontaux"]
-            liste.append(position)
-            nbre_murs = dico['état']['joueurs'][0]['murs']
-            nbre_murs += -1
-            api.jouer_coup(dico['id'], coup, position)
+            dico = api.jouer_coup(Id, coup, position)
+            afficher_damier_ascii(dico)
         elif coup == 'MV':
             position = input("Préciser la position (x, y) et presser la touche ⏎: ")
-            liste = dico['état']["murs"]["verticaux"]
-            liste.append(position)
-            nbre_murs = dico['état']['joueurs'][0]['murs']
-            nbre_murs += -1
-            api.jouer_coup(dico['id'], coup, position)
-        else:
-            raise ValueError("Ce type de coup n'existe pas")
-        afficher_damier_ascii(dico)
-        print(i)
-        continue
+            dico = api.jouer_coup(Id, coup, position)
+            afficher_damier_ascii(dico)
+
 
 jouer_jeu()
