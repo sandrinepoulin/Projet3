@@ -15,8 +15,7 @@ def analyser_commande():
     return args
 
 def afficher_damier_ascii(dic):
-    '''Cette fonction permet d'afficher correctement le damier'''
-    #plaque de jeu
+
     nom1 = dic['état']['joueurs'][0]['nom']
     damier = ''
     pligne = f'Légende: 1 = {nom1}, 2 = automate \n' + '   ' + 35*'-' + '\n'
@@ -36,25 +35,33 @@ def afficher_damier_ascii(dic):
     damier = list(damier.splitlines())
     for i in range(len(damier)):
         damier[i] = list(damier[i])
-    #placer les joueurs dans la plaque de jeu
+    
+    ### bonhommes
+
     x1 = dic['état']["joueurs"][0]["pos"][0]
     y1 = dic['état']["joueurs"][0]["pos"][1]
     x2 = dic['état']["joueurs"][1]["pos"][0]
     y2 = dic['état']["joueurs"][1]["pos"][1]
+
     damier[18-2*y1][4*x1] = '1'
     damier[18-2*y2][4*x2] = '2'
-    #placer les murs
+
+    ### murs horizontaux
+
     for i in range(len(dic['état']["murs"]["horizontaux"])):
         xh = dic['état']["murs"]["horizontaux"][i][0]
         yh = dic['état']["murs"]["horizontaux"][i][1]
         damier[19-2*yh][4*xh-1 : 4*xh+6] = '-------'
+
+    ### murs verticaux
+
     for i in  range(len(dic['état']["murs"]["verticaux"])):
         xv = dic['état']["murs"]["verticaux"][i][0]
         yv = dic['état']["murs"]["verticaux"][i][1]
         damier[18-2*yv][4*xv-2] = '|'
         damier[17-2*yv][4*xv-2] = '|'
         damier[16-2*yv][4*xv-2] = '|'
-    #Retransformer en String
+
     print(pligne + '\n'.join(''.join(i for i in ligne) for ligne in damier) + '\n')
 
 def jouer_jeu():
