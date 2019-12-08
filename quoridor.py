@@ -142,54 +142,53 @@ class Quoridor:
     def __str__(self):
         '''Fonction qui donne le damier de jeu'''
         def afficher_damier_ascii(dico):
-            leg = 'Légende: 1: ' + self.joueurs[0]['nom'] + ' 2: ' + self.joueurs[1]['nom'] + '\n'
+            nom1 = dic['état']['joueurs'][0]['nom']
+        damier = ''
+        pligne = f'Légende: 1 = {nom1}, 2 = automate \n' + '   ' + 35*'-' + '\n'
+        for i in range(9, 0, -1):
+            if i != 1:
+                damier += f'{i}' +  ' | .' + 8*'   .' + ' |' '\n' + '  |' + 35* ' ' + '| \n'
+            elif i == 1:
+                damier += f'{i}' +  ' | .' + 8*'   .' + ' |' '\n'
+        damier += '--|' + 35*'-' + '\n'
+        dligne = '  | '
+        for i in range(1, 10):
+            if i != 9:
+                dligne += f'{i}' + 3*' '
+            elif i == 9:
+                dligne += '9'
+        damier += dligne
+        damier = list(damier.splitlines())
+        for i in range(len(damier)):
+            damier[i] = list(damier[i])
+        
+        ### bonhommes
 
-            top = ' '*3 + '-'*35 + ' \n'
+        x1 = dic['état']["joueurs"][0]["pos"][0]
+        y1 = dic['état']["joueurs"][0]["pos"][1]
+        x2 = dic['état']["joueurs"][1]["pos"][0]
+        y2 = dic['état']["joueurs"][1]["pos"][1]
 
-            temp_middle = []
-            empty_mid_section = ' '*2 + '|' + ' '.join(['   ']*9) + '|\n'
+        damier[18-2*y1][4*x1] = '1'
+        damier[18-2*y2][4*x2] = '2'
 
-            for i in list(range(1, 10))[::-1]:
-                temp_middle.append(f'{i} |' + ' '.join([' . ']*9) + '|\n')
+        ### murs horizontaux
 
-            middle = empty_mid_section.join(temp_middle)
+        for i in range(len(dic['état']["murs"]["horizontaux"])):
+            xh = dic['état']["murs"]["horizontaux"][i][0]
+            yh = dic['état']["murs"]["horizontaux"][i][1]
+            damier[19-2*yh][4*xh-1 : 4*xh+6] = '-------'
 
-            bot = '--|' + '-'*35 + ' \n'
-            bot += '  | ' + '   '.join([f'{i}' for i in range(1, 10)])
-            board = ''.join([leg, top, middle, bot])
+        ### murs verticaux
 
-            #Mettre le damier en liste
-            board_split = [list(ligne) for ligne in board.split('\n')]
+        for i in  range(len(dic['état']["murs"]["verticaux"])):
+            xv = dic['état']["murs"]["verticaux"][i][0]
+            yv = dic['état']["murs"]["verticaux"][i][1]
+            damier[18-2*yv][4*xv-2] = '|'
+            damier[17-2*yv][4*xv-2] = '|'
+            damier[16-2*yv][4*xv-2] = '|'
 
-            #PLACER JOUEUR
-            #position  joueur 1
-            for position in range(1):
-                x, y = dico["joueurs"][0]['pos']
-                board_split[-2*y+20][x*4] = '1'
-
-            #position joueur 2
-            for position in range(1):
-                x, y = dico["joueurs"][1]['pos']
-                board_split[-2*y+20][x*4] = '2'
-            #PLACER MURS
-            #placer murs horizontaux
-            for placement in range(len(dico["murs"]["horizontaux"])):
-                x, y = dico["murs"]["horizontaux"][placement]
-                for variable in range(7):
-                    board_split[-2*y+21][4*x-1+variable] = '-'
-
-            #placer murs verticaux
-            for placement in range(len(dico["murs"]["verticaux"])):
-                x, y = dico["murs"]["verticaux"][placement]
-                for variable in range(3):
-                    board_split[-2*y+18+variable][4*x-2] = '|'
-
-            #Remettre le damier en str
-            rep = '\n'.join([''.join(elem) for elem in board_split])
-            print(rep)
-
-
-        afficher_damier_ascii(self.état_partie())
+        print(pligne + '\n'.join(''.join(i for i in ligne) for ligne in damier) + '\n')
 
     def déplacer_jeton(self, joueur, position):
         '''Méthode qui détermine les déplacements possibles docstring'''

@@ -1,4 +1,4 @@
-'''Le module api traite les fonctions qui communiquent avec e servuer par le module request'''
+'''Le module api traite les fonctions qui communiquent avec servuer par le module request'''
 import requests
 
 
