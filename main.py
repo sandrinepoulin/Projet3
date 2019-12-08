@@ -26,12 +26,13 @@ def analyser_commande():
         # définir comment jouer automatique avec l'interface graphique
         pass
     else:
-        # jouer manuellement  avec la damier ascii
+        # jouer manuellement avec la damier ascii
         pass
     return args.idul
 
 '''analyser_commande()
-Pout faire des tests avec le terminal'''
+Pout faire des tests avec le terminal
+L'idul s'appelle args.idul (quand on va l'utiliser)'''
 
 
 '''J'ai enlevé la valeur par défaut du pemier argument (pour l'idul)
