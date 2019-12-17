@@ -89,10 +89,10 @@ def construire_graphe(joueurs, murs_horizontaux, murs_verticaux):
 class Quoridor:
     '''Classe permettant à de jouer à Quorridor'''
 
-    def __init__(self, joueurs, graphe, état, murs=None):
+    def __init__(self, joueurs, murs=None):
         """Méthode d'initiation"""
 
-        if not isinstance(joueurs, iter):
+        if not isinstance(joueurs, tuple):
             raise QuoridorError("'joueurs' doit être un itérable")
         elif len(joueurs) > 2:
             raise QuoridorError("seulement 2 joueurs acceptés")
@@ -135,8 +135,6 @@ class Quoridor:
                     raise QuoridorError("la position d'un mur est invalide")
             self.joueurs = joueurs
             self.murs = murs
-            self.état = état
-            self.graphe = graphe
         self.état_partie()
 
     def __str__(self):
@@ -296,3 +294,8 @@ class Quoridor:
                 raise QuoridorError('Il y a déjà un mur à cet endroit')
 
             self.murs['verticaux'].append(position)
+
+
+game = Quoridor(('gager41', 'sapou51'))
+
+print(game)

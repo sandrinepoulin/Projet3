@@ -5,15 +5,12 @@ import api
 
 def analyser_commande():
     '''Cette fonction permet de traiter la ligne de commande'''
-    parser = argparse.ArgumentParser(description='Jeu Quoridor - phase 1')
-    group = parser.add_mutually_exclusive_group() 
+    parser = argparse.ArgumentParser(description='Jeu Quoridor - phase 3')
     parser.add_argument(metavar='idul', dest='idul',
                         help='IDUL du joueur.')
-    parser.add_argument('-l', '--lister', action='store_true',
-                        help='Lister les identifiants de vos 20 dernières parties.')
-    group.add_argument('-a', action='store_true', default=False)
-    group.add_argument('-x', action='store_true', default=False)
-    group.add_argument('-ax', action='store_true', default=False)
+    parser.add_argument('-a', '--automatique', action='store_true', default=False, help='Activer le mode automatique.')
+    parser.add_argument('-x', '--graphique', action='store_true', default=False, help='Activer le mode graphique.')
+    '''group.add_argument('-ax', action='store_true', default=False)'''
     args = parser.parse_args()
 
     if args.a:
@@ -22,16 +19,13 @@ def analyser_commande():
     elif args.x:
         # définir comment jouer avec l'interface graphique
         pass
-    elif args.ax:
-        # définir comment jouer automatique avec l'interface graphique
-        pass
     else:
-        # jouer manuellement avec la damier ascii
+        # jouer manuellement avec le damier ascii
         pass
     return args.idul
 
-'''analyser_commande()
-Pout faire des tests avec le terminal
+analyser_commande()
+'''Pout faire des tests avec le terminal
 L'idul s'appelle args.idul (quand on va l'utiliser)'''
 
 
