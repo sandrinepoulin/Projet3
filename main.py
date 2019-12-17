@@ -14,10 +14,10 @@ def analyser_commande():
     args = parser.parse_args()
 
     if args.a:
-        # définir comment jouer automatique
+        # définir comment jouer automatique, le joueur 2 est le serveur et nous on fait une boucle avec jouer_coup
         pass
     elif args.x:
-        # définir comment jouer avec l'interface graphique
+        # définir comment jouer avec l'interface graphique --> appeler QuoridorX
         pass
     else:
         # jouer manuellement avec le damier ascii

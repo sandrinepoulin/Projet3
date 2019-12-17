@@ -1,18 +1,18 @@
+'''module pour jouer dans un interface graphique'''
 import turtle
-import quoridor
+from quoridor import Quoridor
 
-class QoridorX(Quoridor):
 
-    def __init__(self, joueurs, état, murs=None):
-
+class QuoridorX(Quoridor):
 
     def afficher(self):
+        '''fonction pour afficher le jeu dans un interface graphique'''
         fen = turtle.Screen()
         fen.title("Jeu Quoridor")
         fen.setup(width=750, height=750)
 
         dave = turtle.Turtle()
-        dave.color('tan')
+        dave.color('bisque')
         dave.speed('fastest')
 
         dave.forward(375)
@@ -306,7 +306,11 @@ class QoridorX(Quoridor):
         tim.right(90)
         tim.forward(30)
 
-        tim.color('tan')
+        tim.color('bisque')
         tim.forward(10)
 
         turtle.mainloop()
+
+jeu = QuoridorX(('gager41', 'sapou51'))
+
+jeu.afficher()

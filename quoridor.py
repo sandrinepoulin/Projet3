@@ -90,7 +90,7 @@ class Quoridor:
     '''Classe permettant à de jouer à Quorridor'''
 
     def __init__(self, joueurs, murs=None):
-        """Méthode d'initiation"""
+        '''Méthode d'initiation'''
 
         if not isinstance(joueurs, tuple):
             raise QuoridorError("'joueurs' doit être un itérable")
@@ -139,59 +139,57 @@ class Quoridor:
 
     def __str__(self):
         '''Fonction qui donne le damier de jeu'''
+
+        dico = self.état_partie()
         
-        def afficher_damier_ascii(dico):
-            leg = 'Légende: 1: ' + self.joueurs[0]['nom'] + ' 2: ' + self.joueurs[1]['nom'] + '\n'
+        leg = 'Légende: 1: ' + self.joueurs[0]['nom'] + ' 2: ' + self.joueurs[1]['nom'] + '\n'
 
-            top = ' '*3 + '-'*35 + ' \n'
+        top = ' '*3 + '-'*35 + ' \n'
 
-            temp_middle = []
-            empty_mid_section = ' '*2 + '|' + ' '.join(['   ']*9) + '|\n'
+        temp_middle = []
+        empty_mid_section = ' '*2 + '|' + ' '.join(['   ']*9) + '|\n'
 
-            for i in list(range(1, 10))[::-1]:
-                temp_middle.append(f'{i} |' + ' '.join([' . ']*9) + '|\n')
+        for i in list(range(1, 10))[::-1]:
+            temp_middle.append(f'{i} |' + ' '.join([' . ']*9) + '|\n')
 
-            middle = empty_mid_section.join(temp_middle)
+        middle = empty_mid_section.join(temp_middle)
 
-            bot = '--|' + '-'*35 + ' \n'
-            bot += '  | ' + '   '.join([f'{i}' for i in range(1, 10)])
-            board = ''.join([leg, top, middle, bot])
+        bot = '--|' + '-'*35 + ' \n'
+        bot += '  | ' + '   '.join([f'{i}' for i in range(1, 10)])
+        board = ''.join([leg, top, middle, bot])
 
-            #Mettre le damier en liste
-            board_split = [list(ligne) for ligne in board.split('\n')]
+        #Mettre le damier en liste
+        board_split = [list(ligne) for ligne in board.split('\n')]
 
             #PLACER JOUEUR
-            #position  joueur 1
-            for position in range(1):
-                x, y = dico["joueurs"][0]['pos']
-                board_split[-2*y+20][x*4] = '1'
+        #position  joueur 1
+        x1, y1 = dico["joueurs"][0]['pos']
+        board_split[-2*y1+20][x1*4] = '1'
 
-            #position joueur 2
-            for position in range(1):
-                x, y = dico["joueurs"][1]['pos']
-                board_split[-2*y+20][x*4] = '2'
+        #position joueur 2
+        x2, y2 = dico["joueurs"][1]['pos']
+        board_split[-2*y2+20][x2*4] = '2'
+
             #PLACER MURS
-            #placer murs horizontaux
-            for placement in range(len(dico["murs"]["horizontaux"])):
-                x, y = dico["murs"]["horizontaux"][placement]
-                for variable in range(7):
-                    board_split[-2*y+21][4*x-1+variable] = '-'
+        #placer murs horizontaux
+        for placement in range(len(dico["murs"]["horizontaux"])):
+            x, y = dico["murs"]["horizontaux"][placement]
+            for variable in range(7):
+                board_split[-2*y+21][4*x-1+variable] = '-'
 
-            #placer murs verticaux
-            for placement in range(len(dico["murs"]["verticaux"])):
-                x, y = dico["murs"]["verticaux"][placement]
-                for variable in range(3):
-                    board_split[-2*y+18+variable][4*x-2] = '|'
+        #placer murs verticaux
+        for placement in range(len(dico["murs"]["verticaux"])):
+            x, y = dico["murs"]["verticaux"][placement]
+            for variable in range(3):
+                board_split[-2*y+18+variable][4*x-2] = '|'
 
-            #Remettre le damier en str
-            rep = '\n'.join([''.join(elem) for elem in board_split])
-            print(rep)
+        #Remettre le damier en str
+        rep = '\n'.join([''.join(elem) for elem in board_split])
+        return rep
 
-
-        afficher_damier_ascii(self.état_partie())
 
     def déplacer_jeton(self, joueur, position):
-        '''Méthode qui détermine les déplacements possibles docstring'''
+        '''Méthode qui détermine les déplacements possibles'''
 
         self.graphe = construire_graphe(
             [joueur['pos'] for joueur in self.état_partie()['joueurs']],
@@ -212,17 +210,13 @@ class Quoridor:
             raise QuoridorError('Le numéro du joueur doit être 1 ou 2')
 
     def état_partie(self):
-        """Cette fonction produit/retourne l'état actuel de la partie"""
-        for i in range(1):
-            position = self.joueurs[i]['pos']
-            for pos in position:
-                if not 1 <= pos <= 9:
-                    raise QuoridorError("Position out of range")
+        '''Cette fonction produit/retourne l'état actuel de la partie'''
         self.état = {'joueurs': self.joueurs, 'murs': self.murs}
         return self.état
 
+
     def jouer_coup(self, joueur):
-        """Fonction qui détermine le meileur coup possible"""
+        '''Fonction qui détermine le meileur coup possible'''
         self.graphe = construire_graphe(
             [joueur['pos'] for joueur in self.état_partie()['joueurs']],
             self.état['murs']['horizontaux'],
@@ -238,19 +232,17 @@ class Quoridor:
             raise QuoridorError('Le numéro du joueur doit être 1 ou 2')
 
     def partie_terminée(self):
-        """
-        Déterminer si la partie est terminée.
-        """
-        if self.joueurs[0]['pos'][1] == 9:
+        '''Déterminer si la partie est terminée.'''
+
+        if self.état['joueurs'][0]['pos'][1] == 9:
             return 'Le gagnant  est {}'.format(self.joueurs[0]['nom'])
-        if self.joueurs[1]['pos'][1] == 9:
+        if self.état['joueurs'][1]['pos'][1] == 1:
             return 'Le gagnant  est {}'.format(self.joueurs[1]['nom'])
         return False
 
     def placer_mur(self, joueur, position, orientation):
-        """
-        Placer les murs
-        """
+        '''Placer les murs'''
+
         if joueur in {1, 2}:
             if self.joueurs[joueur - 1]['murs'] != 0:
                 self.joueurs[joueur - 1]['murs'] -= 1
@@ -258,6 +250,7 @@ class Quoridor:
                 raise QuoridorError("Ce joueur n'a plus de murs.")
         else:
             raise QuoridorError("Le numéro du joueur doit être 1 ou 2.")
+        
         # murs horizontaux
         if orientation == 'horizontal':
             if 1 > position[0] > 8 or 2 > position[1] > 9:
@@ -296,6 +289,7 @@ class Quoridor:
             self.murs['verticaux'].append(position)
 
 
-game = Quoridor(('gager41', 'sapou51'))
-
-print(game)
+'''game = Quoridor(('gager41', 'sapou51'))
+game.jouer_coup(1)
+game.jouer_coup(2)
+print(game)'''
