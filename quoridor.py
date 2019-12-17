@@ -222,10 +222,23 @@ class Quoridor:
             self.état['murs']['horizontaux'],
             self.état['murs']['verticaux'])
         # On trouve le chemin le plus court et se déplace dans cette direction
+
         if joueur in {1, 2}:
-            path = nx.shortest_path(self.graphe, self.joueurs[joueur-1]['pos'], f'B{joueur}')
+            chem_nous = nx.shortest_path(self.graphe, self.joueurs[0]['pos'], f'B{joueur}')
+            chem_bot = nx.shortest_path(self.graphe, self.joueurs[1]['pos'], f'B{joueur}')
             if self.partie_terminée() is False:
-                self.déplacer_jeton(joueur, path[1])
+                if len(chem_nous) <= len(chem_bot):
+                    try:
+                        self. placer_mur(1, chem_bot[1], 'horizontal')
+                    except QuoridorError:
+                        if self.joueurs[joueur - 1]['murs'] == 0:
+                            self.déplacer_jeton(1, chem_nous[1])
+                        incr = 1
+                        while QuoridorError:
+                                self.placer_mur(1, chem_bot[1+incr], 'horizontal')
+                                incr += 1
+                else:
+                    self.déplacer_jeton(1, chem_nous[1])
             else:
                 raise QuoridorError('La partie est terminée')
         else:
@@ -290,6 +303,8 @@ class Quoridor:
 
 
 '''game = Quoridor(('gager41', 'sapou51'))
-game.jouer_coup(1)
-game.jouer_coup(2)
+for i in range(3):
+    game.jouer_coup(1)
+    game.jouer_coup(2)
+
 print(game)'''

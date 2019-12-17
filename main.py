@@ -15,6 +15,8 @@ def analyser_commande():
 
     if args.a:
         # définir comment jouer automatique, le joueur 2 est le serveur et nous on fait une boucle avec jouer_coup
+        # notre robot fait appel à la fonction jouer_coup de la classe Quoridor, 
+        # puis on envoie le dictionnaire de l'état de la partie au serveur qui appelle sa fonciton jouer_coup
         pass
     elif args.x:
         # définir comment jouer avec l'interface graphique --> appeler QuoridorX

@@ -6,6 +6,9 @@ from quoridor import Quoridor
 class QuoridorX(Quoridor):
 
     def afficher(self):
+
+        dico = self.état_partie()
+
         '''fonction pour afficher le jeu dans un interface graphique'''
         fen = turtle.Screen()
         fen.title("Jeu Quoridor")
@@ -309,7 +312,46 @@ class QuoridorX(Quoridor):
         tim.color('bisque')
         tim.forward(10)
 
+            #placer joueurs
+        #joueur 1
+        x1, y1 = dico["joueurs"][0]['pos']
+        joueur1 = turtle.Turtle()
+        joueur1.color('purple')
+        joueur1.speed('fastest')
+        joueur1.penup()
+        joueur1.setpos(-332 + x1*67 , -360 + y1*67)
+        joueur1.pendown()
+        joueur1.begin_fill()
+        joueur1.circle(25)
+        joueur1.end_fill()
+
+        #joueur 2
+        x2, y2 = dico["joueurs"][1]['pos']
+        joueur2 = turtle.Turtle()
+        joueur2.color('olivedrab')
+        joueur2.speed('fastest')
+        joueur2.penup()
+        joueur2.setpos(-332 + x2*67 , -360 + x2*67)
+        joueur2.pendown()
+        joueur2.begin_fill()
+        joueur2.circle(25)
+        joueur2.end_fill()
+
+
+            #placer murs
+        #murs horizontaux
+
+
+        #murs verticaux
+
+
+
+
         turtle.mainloop()
+
+
+
+### je vais devoir redéfinir placer_murs et déplacer_pion avec super() pour avoir les bonnes coordonnées
 
 jeu = QuoridorX(('gager41', 'sapou51'))
 
