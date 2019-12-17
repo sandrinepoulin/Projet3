@@ -22,7 +22,7 @@ def analyser_commande():
         dico = api.débuter_partie(idul)
         Id = dico['id']
         jeu = quoridor.Quoridor(dico)
-        while quoridor.QuoridorError False:
+        while quoridor.QuoridorError is False:
             jeu.jouer_coup(1)
             dico = api.jouer_coup(Id, type_de_coup, position)
         print(jeu)
@@ -51,7 +51,7 @@ def analyser_commande():
         dico = api.débuter_partie(idul)
         Id = dico['id']
         jeu = quoridorx.QuoridorX(dico)
-        while quoridor.QuoridorError False:
+        while quoridor.QuoridorError is False:
             jeu.jouer_coup(1)
             dico = api.jouer_coup(Id, type_de_coup, position)
         jeu.afficher()

@@ -236,8 +236,8 @@ class Quoridor:
                             self.déplacer_jeton(1, chem_nous[1])
                         incr = 1
                         while QuoridorError:
-                                self.placer_mur(1, chem_bot[1+incr], 'horizontal')
-                                incr += 1
+                            self.placer_mur(1, chem_bot[1+incr], 'horizontal')
+                            incr += 1
                 else:
                     self.déplacer_jeton(1, chem_nous[1])
             else:
@@ -264,7 +264,7 @@ class Quoridor:
                 raise QuoridorError("Ce joueur n'a plus de murs.")
         else:
             raise QuoridorError("Le numéro du joueur doit être 1 ou 2.")
-        
+
         # murs horizontaux
         if orientation == 'horizontal':
             if 1 > position[0] > 8 or 2 > position[1] > 9:

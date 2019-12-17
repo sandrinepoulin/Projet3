@@ -19,7 +19,7 @@ def débuter_partie(idul):
         rep = rep.json()
         if 'message' in rep:
             raise RuntimeError(rep['message'])
-        return rep    
+        return rep
     return f"Le Post sur {url_base+'débuter'} a produit le code d'erreur {rep.status_code}."
 
 
@@ -31,7 +31,7 @@ def jouer_coup(id_partie, type_coup, pos):
         rep = rep.json()
         if 'message' in rep:
             raise RuntimeError(rep['message'])
-        elif 'gagnant' in rep:
+        if 'gagnant' in rep:
             raise StopIteration('nom du gagnant')   ### trouver comment entrer le nom du gagnant
         return rep
     return f"Le Post sur {url_base+'jouer'} a produit le code d'erreur {rep.status_code}."
