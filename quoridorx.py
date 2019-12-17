@@ -4,12 +4,13 @@ from quoridor import Quoridor
 
 
 class QuoridorX(Quoridor):
+    '''cette classe sert à créer un interface graphique'''
 
     def afficher(self):
+        '''fonction pour afficher le jeu dans un interface graphique'''
 
         dico = self.état_partie()
 
-        '''fonction pour afficher le jeu dans un interface graphique'''
         fen = turtle.Screen()
         fen.title("Jeu Quoridor")
         fen.setup(width=750, height=750)
@@ -319,7 +320,7 @@ class QuoridorX(Quoridor):
         joueur1.color('teal')
         joueur1.speed('fastest')
         joueur1.penup()
-        joueur1.setpos(-332 + x1*67 , -360 + y1*67)
+        joueur1.setpos(-332 + x1*67, -360 + y1*67)
         joueur1.pendown()
         joueur1.begin_fill()
         joueur1.circle(25)
@@ -331,7 +332,7 @@ class QuoridorX(Quoridor):
         joueur2.color('olivedrab')
         joueur2.speed('fastest')
         joueur2.penup()
-        joueur2.setpos(-332 + x2*67 , -360 + y2*67)
+        joueur2.setpos(-332 + x2*67, -360 + y2*67)
         joueur2.pendown()
         joueur2.begin_fill()
         joueur2.circle(25)

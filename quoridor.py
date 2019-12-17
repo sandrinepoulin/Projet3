@@ -94,9 +94,9 @@ class Quoridor:
 
         if not isinstance(joueurs, tuple):
             raise QuoridorError("'joueurs' doit être un itérable")
-        elif len(joueurs) > 2:
+        if len(joueurs) > 2:
             raise QuoridorError("seulement 2 joueurs acceptés")
-        elif isinstance(joueurs[0], str) and isinstance(joueurs[1], str):
+        if isinstance(joueurs[0], str) and isinstance(joueurs[1], str):
             self.joueurs = [{'nom': joueurs[0], 'murs': 10, 'pos': (5, 1)},
                             {'nom': joueurs[1], 'murs': 10, 'pos': (5, 9)}]
             self.murs = {'horizontaux': [], 'verticaux': []}
@@ -108,7 +108,7 @@ class Quoridor:
             if joueurs['joueurs'][0]['murs'] or joueurs['joueurs'][0]['murs'] > 10:
                 raise QuoridorError('nombre de murs invalide')
 
-            elif joueurs['joueurs'][0]['pos'][0] or joueurs['joueurs'][0]['pos'][1] < 0:
+            if joueurs['joueurs'][0]['pos'][0] or joueurs['joueurs'][0]['pos'][1] < 0:
                 raise QuoridorError('postion(s) invalide(s)')
 
             elif joueurs['joueurs'][1]['pos'][0] or joueurs['joueurs'][1]['pos'][1] < 0:
@@ -136,12 +136,13 @@ class Quoridor:
             self.joueurs = joueurs
             self.murs = murs
         self.état_partie()
+        self.graphe = graphe
 
     def __str__(self):
         '''Fonction qui donne le damier de jeu'''
 
         dico = self.état_partie()
-        
+
         leg = 'Légende: 1: ' + self.joueurs[0]['nom'] + ' 2: ' + self.joueurs[1]['nom'] + '\n'
 
         top = ' '*3 + '-'*35 + ' \n'

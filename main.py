@@ -14,7 +14,7 @@ def analyser_commande():
     group.add_argument('-a', '--automatique', action='store_true', default=False, help='Activer le mode automatique.')
     group.add_argument('-x', '--graphique', action='store_true', default=False, help='Activer le mode graphique.')
     group.add_argument('-ax', '--graphique_automatique', action='store_true', default=False, help='Activer le mode automatique et graphique.')
-    
+
     args = parser.parse_args()
 
     if args.automatique:
@@ -22,11 +22,10 @@ def analyser_commande():
         dico = api.débuter_partie(idul)
         Id = dico['id']
         jeu = quoridor.Quoridor(dico)
-        while quoridor.QuoridorError == False:
+        while quoridor.QuoridorError False:
             jeu.jouer_coup(1)
             dico = api.jouer_coup(Id, type_de_coup, position)
         print(jeu)
-        pass
 
     elif args.graphique:
         idul = analyser_commande().idul
@@ -52,11 +51,10 @@ def analyser_commande():
         dico = api.débuter_partie(idul)
         Id = dico['id']
         jeu = quoridorx.QuoridorX(dico)
-        while quoridor.QuoridorError == False:
+        while quoridor.QuoridorError False:
             jeu.jouer_coup(1)
             dico = api.jouer_coup(Id, type_de_coup, position)
         jeu.afficher()
-        pass
 
     else:
         jeu = quoridor.Quoridor(dico)
