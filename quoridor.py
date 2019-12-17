@@ -300,11 +300,3 @@ class Quoridor:
                 raise QuoridorError('Il y a déjà un mur à cet endroit')
 
             self.murs['verticaux'].append(position)
-
-
-'''game = Quoridor(('gager41', 'sapou51'))
-for i in range(3):
-    game.jouer_coup(1)
-    game.jouer_coup(2)
-
-print(game)'''

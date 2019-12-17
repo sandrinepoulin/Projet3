@@ -316,7 +316,7 @@ class QuoridorX(Quoridor):
         #joueur 1
         x1, y1 = dico["joueurs"][0]['pos']
         joueur1 = turtle.Turtle()
-        joueur1.color('purple')
+        joueur1.color('teal')
         joueur1.speed('fastest')
         joueur1.penup()
         joueur1.setpos(-332 + x1*67 , -360 + y1*67)
@@ -331,28 +331,52 @@ class QuoridorX(Quoridor):
         joueur2.color('olivedrab')
         joueur2.speed('fastest')
         joueur2.penup()
-        joueur2.setpos(-332 + x2*67 , -360 + x2*67)
+        joueur2.setpos(-332 + x2*67 , -360 + y2*67)
         joueur2.pendown()
         joueur2.begin_fill()
         joueur2.circle(25)
         joueur2.end_fill()
 
-
             #placer murs
         #murs horizontaux
+        murh = turtle.Turtle()
+        murh.color('saddlebrown')
+        murh.speed('fastest')
+        for i in range(len(dico["murs"]["horizontaux"])):
+            x, y = dico["murs"]["horizontaux"][i]
+        murh.penup()
+        murh.setpos(-367 + x*67, -377 + y*67)
+        murh.pendown()
+        murh.begin_fill()
+        murh.forward(67*2)
+        murh.left(90)
+        murh.forward(16)
+        murh.left(90)
+        murh.forward(67*2)
+        murh.left(90)
+        murh.forward(16)
+        murh.left(90)
+        murh.end_fill()
 
 
         #murs verticaux
-
-
-
+        murv = turtle.Turtle()
+        murv.color('saddlebrown')
+        murv.speed('fastest')
+        for i in range(len(dico["murs"]["verticaux"])):
+            x, y = dico["murs"]["verticaux"][i]
+        murv.penup()
+        murv.setpos(-367-8 + x*67, -368 + y*67)
+        murv.pendown()
+        murv.begin_fill()
+        murv.forward(16)
+        murv.left(90)
+        murv.forward(67*2)
+        murv.left(90)
+        murv.forward(16)
+        murv.left(90)
+        murv.forward(67*2)
+        murv.left(90)
+        murv.end_fill()
 
         turtle.mainloop()
-
-
-
-### je vais devoir redéfinir placer_murs et déplacer_pion avec super() pour avoir les bonnes coordonnées
-
-jeu = QuoridorX(('gager41', 'sapou51'))
-
-jeu.afficher()
